@@ -39,12 +39,9 @@ function testIfImage(artObjectIDs,randomIndex){
                             const liElement = document.createElement('li')
                             liElement.textContent = data
                             imgDescription.appendChild(liElement)
+                        
+
                         })
-                    
-                        const linkElement = document.createElement('a')
-                        linkElement.textContent = json.objectURL
-                        linkElement.href = json.objectURL
-                        imgDescription.appendChild(linkElement)
                     }
                 })
             }
@@ -61,8 +58,8 @@ function fetchData(resource){
 
 function main(){
 
-    const showArt = document.getElementById('description-input')
-    showArt.addEventListener('submit', (event) =>{
+    const inputForm = document.getElementById('description-input')
+    inputForm.addEventListener('submit', (event) =>{
         event.preventDefault()
         const dropdownElement = document.getElementById('departments')
         if(dropdownElement.value === "0"){
@@ -73,10 +70,14 @@ function main(){
         }
     })
 
+    const primaryImg = document.getElementById('todays-image')
+    primaryImg.addEventListener("mouseover",(event)=>{
+        primaryImg.style.border = "5px solid blue"
+    })
 
-
-    
-
+    primaryImg.addEventListener("mouseout",(event)=>{
+        primaryImg.style.border = "none"
+    })
 
 }
 
