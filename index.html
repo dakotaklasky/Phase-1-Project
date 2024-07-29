@@ -6,10 +6,37 @@
     <body>
         <header>
             <h3>Dakota's project</h3>
-            <button id="generate-img">Show Me New Image</button>
         </header>
         <div>
-            <img id="todays-image"> <img>
+            <form id="description-input">
+                <label for="artist">Artist:</label>
+                <input type="string" name="artist" id="artist" />
+                <label for="departments"> Department:</label>
+                <select name="departments" id="departments">
+                    <option value=0></option>
+                    <option value=1>American Decorative Arts</option>
+                    <option value=3>Ancient Near Eastern Art</option>
+                    <option value=4>Arms and Armor</option>
+                    <option value=5>Arts of Africa, Oceania, and the Americas</option>
+                    <option value=6>Asian Art</option>
+                    <option value=7>The Cloisters</option>
+                    <option value=9>Drawings and Prints</option>
+                    <option value=10>Egyptian Art</option>
+                    <option value=11>European Paintings</option>
+                    <option value=12>European Sculpture and Decorative Arts</option>
+                    <option value=13>Greek and Roman Art</option>
+                    <option value=14>Islamic Art</option>
+                    <option value=15>The Robert Lehman Collection</option>
+                    <option value=17>Medieval Art</option>
+                    <option value=18>Musical Instruments</option>
+                    <option value=19>Photographs</option>
+                    <option value=21>Modern Art</option>
+                </select>
+                <input type="submit" id='submit-button' value="Show me a work of art!" />
+            </form>
+            <a id="img-link">
+                <img id="todays-image"> <img>
+            </a>
             <ul id="description"></ul>
         </div>
         
