@@ -1,3 +1,5 @@
+const displayArray = []
+
 //Generate a random index value using the length of the array of object Ids
 function getRandomIndex(artObjectIDs){
     return Math.floor(Math.random() * artObjectIDs.length)
@@ -5,7 +7,6 @@ function getRandomIndex(artObjectIDs){
 
 //Test if the index of the given array of object Ids returns a valid object with an image URL
 function testIfImage(artObjectIDs,randomIndex){
-    console.log(artObjectIDs[randomIndex])
     const imgDescription = document.getElementById('description')
     fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${artObjectIDs[randomIndex]}`)
         .then(response => {
@@ -22,6 +23,7 @@ function testIfImage(artObjectIDs,randomIndex){
                     }
                     //display image URL
                     else{
+                        displayArray.push(artObjectIDs[randomIndex])
                         const primaryImg = document.getElementById('todays-image')
                         const imgLink = document.getElementById('img-link')
                         primaryImg.src = json.primaryImage
@@ -40,6 +42,7 @@ function testIfImage(artObjectIDs,randomIndex){
                             liElement.textContent = data
                             imgDescription.appendChild(liElement)
                         
+
 
                         })
                     }
@@ -71,13 +74,28 @@ function main(){
     })
 
     const primaryImg = document.getElementById('todays-image')
-    primaryImg.addEventListener("mouseover",(event)=>{
+    primaryImg.addEventListener("mouseover",()=>{
         primaryImg.style.border = "5px solid blue"
     })
 
-    primaryImg.addEventListener("mouseout",(event)=>{
+    primaryImg.addEventListener("mouseout",()=>{
         primaryImg.style.border = "none"
     })
+
+    const previousButton = document.getElementById('previous')
+    
+        previousButton.addEventListener("click",() =>{
+            if(displayArray.length >= 2){
+                testIfImage(displayArray,displayArray.length-2)
+            }
+            else{
+                alert("There is no previous image!")
+            }
+        })
+    
+
+
+
 
 }
 
