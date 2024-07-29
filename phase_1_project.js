@@ -7,6 +7,7 @@ function getRandomIndex(artObjectIDs){
 
 //Test if the index of the given array of object ids returns a valid object with an image URL
 function testIfImage(artObjectIDs,randomIndex){
+    console.log(artObjectIDs[randomIndex])
     const imgDescription = document.getElementById('description')
     fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${artObjectIDs[randomIndex]}`)
     .then(response => {
@@ -67,7 +68,7 @@ function main(){
             fetchData("https://collectionapi.metmuseum.org/public/collection/v1/objects")
         }
         else{
-            fetchData(`https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${dropdownElement.value}&q=cat`)
+            fetchData(`https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=${dropdownElement.value}`)
         }
     })
 
@@ -102,5 +103,8 @@ main()
 //remove empty description elements or input unknown
 //formatting
 //when image is loading add an element to say so
+//display previous needs to keep going back
+//make faster, how to filter out images
+//add artist filter
 
 
