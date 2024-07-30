@@ -7,8 +7,10 @@ img {
 
   header{
     text-align: center;
-    background-color: black;
-    color: white;
+    color: red;
+    text-shadow: 0 0 3px black, 0 0 5px black;
+    font-size: 27px;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRozrutdeyYrDchvY8m2ktG0NVyJ1l2gFLIWA&s");
   }
 
 
@@ -24,6 +26,10 @@ img {
     font-size: 24px;
     font-style: italic;
     font-weight: bold;
+  }
+
+  #Date{
+    font-size: 24px;
   }
 
   #Artist{

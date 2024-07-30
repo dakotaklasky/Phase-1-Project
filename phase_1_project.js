@@ -35,10 +35,11 @@ function testIfImage(artObjectIDs,randomIndex){
 
                     //display image description
                     const imgDescription = document.getElementById('description')
-                    const descriptionArray = [['Title',json.title], ['Artist',json.artistDisplayName],
+                    const descriptionArray = [['Title',json.title], ['Date',json.objectDate],['Artist',json.artistDisplayName],
                     ['Department',json.department],['Culture',json.culture],['Country',json.country],['Period',json.period],
                     ,['Medium',json.medium],['Dimensions',json.dimensions]]
-
+                    
+                    //Test if fields are blank, otherwise display them
                     descriptionArray.forEach(data =>{
                         if(data[1] != ""){
                         const liElement = document.createElement('li')
@@ -52,11 +53,6 @@ function testIfImage(artObjectIDs,randomIndex){
                         imgDescription.appendChild(liElement)
                         }
                     })
-
-                    const titleElement = document.getElementById('Title')
-                        if(json.objectDate != ""){
-                            titleElement.append(`, ${json.objectDate}`)
-                        }
                     
                 }
             })
@@ -75,10 +71,10 @@ function fetchData(resource){
 }
 
 function main(){
-    //display image on page open
+    //display random image on page open
     fetchData("https://collectionapi.metmuseum.org/public/collection/v1/objects")
 
-    //Change URL used to fetch data depending on dropdown input
+    //Change URL used to fetch data depending on dropdown input or search value
     const inputForm = document.getElementById('description-input')
     inputForm.addEventListener('submit', (event) =>{
         event.preventDefault()
@@ -98,9 +94,6 @@ function main(){
             fetchData(`https://collectionapi.metmuseum.org/public/collection/v1/search?=${searchElement.value}`)
         }
     })
-
-   
-
 
     //Change border color when image moused over
     const primaryImg = document.getElementById('todays-image')
