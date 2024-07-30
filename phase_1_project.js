@@ -8,6 +8,7 @@ function getRandomIndex(artObjectIDs){
 //Test if the index of the given array of object ids returns a valid object with an image URL
 function testIfImage(artObjectIDs,randomIndex){
     const imgDescription = document.getElementById('description')
+    imgDescription.textContent = ""
     fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${artObjectIDs[randomIndex]}`)
     .then(response => {
         //If object is not valid run function again with different random index
@@ -34,10 +35,10 @@ function testIfImage(artObjectIDs,randomIndex){
 
                     //display image description
                     const imgDescription = document.getElementById('description')
-                    const descriptionArray = [['Title',json.title], ['Artist',json.artistDisplayName],['Date',json.objectDate],
+                    const descriptionArray = [['Title',json.title], ['Artist',json.artistDisplayName],
                     ['Department',json.department],['Culture',json.culture],['Country',json.country],['Period',json.period],
                     ,['Medium',json.medium],['Dimensions',json.dimensions]]
-                    
+
                     descriptionArray.forEach(data =>{
                         if(data[1] != ""){
                         const liElement = document.createElement('li')
@@ -51,6 +52,12 @@ function testIfImage(artObjectIDs,randomIndex){
                         imgDescription.appendChild(liElement)
                         }
                     })
+
+                    const titleElement = document.getElementById('Title')
+                        if(json.objectDate != ""){
+                            titleElement.append(`, ${json.objectDate}`)
+                        }
+                    
                 }
             })
         }
@@ -75,16 +82,25 @@ function main(){
     const inputForm = document.getElementById('description-input')
     inputForm.addEventListener('submit', (event) =>{
         event.preventDefault()
-        const imgDescription = document.getElementById('description')
-        imgDescription.textContent = ""
         const dropdownElement = document.getElementById('departments')
-        if(dropdownElement.value === "0"){
+        const searchElement = document.getElementById('subject-query')
+
+        if(dropdownElement.value === "0" && searchElement.value === ""){
             fetchData("https://collectionapi.metmuseum.org/public/collection/v1/objects")
         }
-        else{
+        else if(dropdownElement.value != "0" && searchElement.value === ""){
             fetchData(`https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=${dropdownElement.value}`)
         }
+        else if(dropdownElement.value != "0" && searchElement.value != ""){
+            fetchData(`https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${dropdownElement.value}&q=${searchElement.value}`)
+        }
+        else if(dropdownElement.value == "0"  && searchElement.value != ""){
+            fetchData(`https://collectionapi.metmuseum.org/public/collection/v1/search?=${searchElement.value}`)
+        }
     })
+
+   
+
 
     //Change border color when image moused over
     const primaryImg = document.getElementById('todays-image')
@@ -112,14 +128,5 @@ function main(){
 }
 
 main()
-
-
-
-//To Do
-//**remove empty description elements or input unknown
-//formatting
-//when image is loading add an element to say so
-//add artist filter
-//**make code faster
 
 
