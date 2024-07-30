@@ -30,20 +30,26 @@ function testIfImage(artObjectIDs,randomIndex){
                     const primaryImg = document.getElementById('todays-image')
                     const imgLink = document.getElementById('img-link')
                     primaryImg.src = json.primaryImage
-                    primaryImg.style.height = '500px'
                     imgLink.href = json.objectURL
 
                     //display image description
                     const imgDescription = document.getElementById('description')
-                    imgDescription.textContent = "Image Description:"
-                    const descriptionArray = [`Title: ${json.title}`,`Department: ${json.department}`,
-                        `Culture: ${json.culture}`, `Country: ${json.country}`,`Period: ${json.period}`,
-                        `Artist: ${json.artistDisplayName}`,`Date: ${json.objectDate}`,
-                        `Medium: ${json.medium}`,`Dimensions: ${json.dimensions}`]
+                    const descriptionArray = [['Title',json.title], ['Artist',json.artistDisplayName],['Date',json.objectDate],
+                    ['Department',json.department],['Culture',json.culture],['Country',json.country],['Period',json.period],
+                    ,['Medium',json.medium],['Dimensions',json.dimensions]]
+                    
                     descriptionArray.forEach(data =>{
+                        if(data[1] != ""){
                         const liElement = document.createElement('li')
-                        liElement.textContent = data
+                        liElement.id = data[0]
+                        if(['Title','Artist','Date'].includes(data[0])){
+                            liElement.textContent = data[1]
+                        }
+                        else{
+                            liElement.textContent = `${data[0]}: ${data[1]}`
+                        }
                         imgDescription.appendChild(liElement)
+                        }
                     })
                 }
             })
@@ -69,6 +75,8 @@ function main(){
     const inputForm = document.getElementById('description-input')
     inputForm.addEventListener('submit', (event) =>{
         event.preventDefault()
+        const imgDescription = document.getElementById('description')
+        imgDescription.textContent = ""
         const dropdownElement = document.getElementById('departments')
         if(dropdownElement.value === "0"){
             fetchData("https://collectionapi.metmuseum.org/public/collection/v1/objects")
@@ -81,7 +89,7 @@ function main(){
     //Change border color when image moused over
     const primaryImg = document.getElementById('todays-image')
     primaryImg.addEventListener("mouseover",()=>{
-        primaryImg.style.border = "5px solid blue"
+        primaryImg.style.border = "2px solid blue"
     })
 
     //Remove border when mouse moves
@@ -104,6 +112,7 @@ function main(){
 }
 
 main()
+
 
 
 //To Do

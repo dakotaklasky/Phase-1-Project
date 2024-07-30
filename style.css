@@ -1,0 +1,23 @@
+img {
+    box-shadow: 0 0 20px gray;
+    height: 500px;
+    border-radius: 7px;
+  }
+
+  header{
+    text-align: center;
+    background-color: black;
+    color: white;
+  }
+
+  #Title{
+    font-size: 20px;
+    font-weight: bold
+
+  }
+
+  ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margins */
+  }

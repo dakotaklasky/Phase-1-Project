@@ -2,16 +2,19 @@
 <html>
     <head>
         <script defer type = "text/javascript" src="./phase_1_project.js"></script>
+        <link rel="stylesheet" href = "style.css">
     </head>
     <body>
         <header>
+            <br>
             <h3>Virtual Met Museum</h3>
+            <br>
         </header>
-        <div>
+        <div style="width:50%; float: left; display: inline-block;">
+            <br>
             <form id="description-input">
              <!--   <label for="artist">Artist:</label>
-                <input type="string" name="artist" id="artist" /> 
-            --> 
+                <input type="string" name="artist" id="artist" /> --> 
                 <label for="departments"> Department:</label>
                 <select name="departments" id="departments">
                     <option value=0></option>
@@ -35,12 +38,20 @@
                 </select>
                 <input type="submit" id='submit-button' value="Show me a work of art!" />
             </form>
-            <a id="img-link">
-                <img id="todays-image"> <img>
-            </a>
             <button id="previous">Display Previous</button>
             <ul id="description"></ul>
         </div>
+
+        <div style="width:50%; 
+        float: left; 
+        display: inline-block;">
+            <br>
+            <a id="img-link">
+                <img id="todays-image"> <img>
+            </a>
+        </div>
+
+        
         
     </body>
 
