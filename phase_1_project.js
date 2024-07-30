@@ -7,7 +7,6 @@ function getRandomIndex(artObjectIDs){
 
 //Test if the index of the given array of object ids returns a valid object with an image URL
 function testIfImage(artObjectIDs,randomIndex){
-    console.log(artObjectIDs[randomIndex])
     const imgDescription = document.getElementById('description')
     fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${artObjectIDs[randomIndex]}`)
     .then(response => {
@@ -24,7 +23,10 @@ function testIfImage(artObjectIDs,randomIndex){
                 }
                 else{
                     //display image
-                    displayArray.push(artObjectIDs[randomIndex])
+                    if (displayArray.includes(artObjectIDs[randomIndex]) === false){
+                        displayArray.push(artObjectIDs[randomIndex])
+                    }
+                    //console.log(displayArray)
                     const primaryImg = document.getElementById('todays-image')
                     const imgLink = document.getElementById('img-link')
                     primaryImg.src = json.primaryImage
@@ -49,6 +51,7 @@ function testIfImage(artObjectIDs,randomIndex){
     })
 }
 
+
 //fetch and display data for any given resource URL
 function fetchData(resource){
     fetch(resource)
@@ -59,6 +62,9 @@ function fetchData(resource){
 }
 
 function main(){
+    //display image on page open
+    fetchData("https://collectionapi.metmuseum.org/public/collection/v1/objects")
+
     //Change URL used to fetch data depending on dropdown input
     const inputForm = document.getElementById('description-input')
     inputForm.addEventListener('submit', (event) =>{
@@ -87,7 +93,8 @@ function main(){
     const previousButton = document.getElementById('previous')
         previousButton.addEventListener("click",() =>{
             if(displayArray.length >= 2){
-                testIfImage(displayArray,displayArray.length-2)
+                displayArray.pop()
+                testIfImage(displayArray,displayArray.length-1)
             }
             else{
                 alert("There is no previous image!")
@@ -100,11 +107,10 @@ main()
 
 
 //To Do
-//remove empty description elements or input unknown
+//**remove empty description elements or input unknown
 //formatting
 //when image is loading add an element to say so
-//display previous needs to keep going back
-//make faster, how to filter out images
 //add artist filter
+//**make code faster
 
 
