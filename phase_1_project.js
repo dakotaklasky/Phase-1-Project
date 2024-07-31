@@ -56,6 +56,9 @@ function testIfImage(artObjectIDs,randomIndex){
                     
                 }
             })
+            .catch((error) =>{
+                alert('Something went wrong.',error)
+            })
         }
     })
 }
@@ -86,18 +89,19 @@ function main(){
         event.preventDefault()
         const dropdownElement = document.getElementById('departments')
         const searchElement = document.getElementById('subject-query')
+        const searchValue = searchElement.value.replace(/ /g, '%20')
 
-        if(dropdownElement.value === "0" && searchElement.value === ""){
+        if(dropdownElement.value === "0" && searchValue === ""){
             fetchData("https://collectionapi.metmuseum.org/public/collection/v1/objects")
         }
-        else if(dropdownElement.value != "0" && searchElement.value === ""){
+        else if(dropdownElement.value != "0" && searchValue === ""){
             fetchData(`https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=${dropdownElement.value}`)
         }
-        else if(dropdownElement.value != "0" && searchElement.value != ""){
-            fetchData(`https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${dropdownElement.value}&q=${searchElement.value}`)
+        else if(dropdownElement.value != "0" && searchValue != ""){
+            fetchData(`https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${dropdownElement.value}&q=${searchValue}`)
         }
-        else if(dropdownElement.value == "0"  && searchElement.value != ""){
-            fetchData(`https://collectionapi.metmuseum.org/public/collection/v1/search?&q=${searchElement.value}`)
+        else if(dropdownElement.value == "0"  && searchValue != ""){
+            fetchData(`https://collectionapi.metmuseum.org/public/collection/v1/search?&q=${searchValue}`)
         }
     })
 
@@ -130,3 +134,4 @@ main()
 
 
 //already showed all images alert
+//what if you put multiple words in the search
