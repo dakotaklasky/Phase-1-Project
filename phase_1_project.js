@@ -5,7 +5,6 @@ function getRandomIndex(artObjectIDs){
     return Math.floor(Math.random() * artObjectIDs.length)
 }
 
-
 //Test if the index of the given array of object ids returns a valid object with an image URL
 function testIfImage(artObjectIDs,randomIndex){
     fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${artObjectIDs[randomIndex]}`)
@@ -17,6 +16,7 @@ function testIfImage(artObjectIDs,randomIndex){
         else{
             response.json()
             .then(json => {
+                //clear image description contents
                 const imgDescription = document.getElementById('description')
                 imgDescription.textContent = ""
 
@@ -29,7 +29,6 @@ function testIfImage(artObjectIDs,randomIndex){
                     if (displayArray.includes(artObjectIDs[randomIndex]) === false){
                         displayArray.push(artObjectIDs[randomIndex])
                     }
-                    //console.log(displayArray)
                     const primaryImg = document.getElementById('todays-image')
                     const imgLink = document.getElementById('img-link')
                     primaryImg.src = json.primaryImage
@@ -41,7 +40,7 @@ function testIfImage(artObjectIDs,randomIndex){
                     ['Department',json.department],['Culture',json.culture],['Country',json.country],['Period',json.period],
                     ,['Medium',json.medium],['Dimensions',json.dimensions]]
                     
-                    //Test if fields are blank, otherwise display them
+                    //Test if description fields are blank, otherwise display them
                     descriptionArray.forEach(data =>{
                         if(data[1] != ""){
                         const liElement = document.createElement('li')
@@ -76,7 +75,6 @@ function fetchData(resource){
         else{
             testIfImage(json.objectIDs,getRandomIndex(json.objectIDs))            
         }
-        
     })
 }
 
@@ -132,10 +130,3 @@ function main(){
 }
 
 main()
-
-
-//already showed all images alert
-//too big of image
-//format other details
-
-//upon each new pull of artobject id ran through needs to get repopulated
