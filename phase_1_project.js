@@ -66,7 +66,13 @@ function fetchData(resource){
     fetch(resource)
     .then(response => response.json())
     .then(json => {
-        testIfImage(json.objectIDs,getRandomIndex(json.objectIDs))
+        if(json.total === 0){
+            alert('No images match the search result!')
+        }
+        else{
+            testIfImage(json.objectIDs,getRandomIndex(json.objectIDs))
+        }
+        
     })
 }
 
@@ -91,14 +97,14 @@ function main(){
             fetchData(`https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${dropdownElement.value}&q=${searchElement.value}`)
         }
         else if(dropdownElement.value == "0"  && searchElement.value != ""){
-            fetchData(`https://collectionapi.metmuseum.org/public/collection/v1/search?=${searchElement.value}`)
+            fetchData(`https://collectionapi.metmuseum.org/public/collection/v1/search?&q=${searchElement.value}`)
         }
     })
 
     //Change border color when image moused over
     const primaryImg = document.getElementById('todays-image')
     primaryImg.addEventListener("mouseover",()=>{
-        primaryImg.style.border = "2px solid blue"
+        primaryImg.style.border = "3px solid blue"
     })
 
     //Remove border when mouse moves
@@ -123,3 +129,4 @@ function main(){
 main()
 
 
+//already showed all images alert
