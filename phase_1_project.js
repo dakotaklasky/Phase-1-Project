@@ -5,6 +5,7 @@ function getRandomIndex(artObjectIDs){
     return Math.floor(Math.random() * artObjectIDs.length)
 }
 
+
 //Test if the index of the given array of object ids returns a valid object with an image URL
 function testIfImage(artObjectIDs,randomIndex){
     fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${artObjectIDs[randomIndex]}`)
@@ -33,11 +34,6 @@ function testIfImage(artObjectIDs,randomIndex){
                     const imgLink = document.getElementById('img-link')
                     primaryImg.src = json.primaryImage
                     imgLink.href = json.objectURL
-
-                    if(primaryImg.offsetWidth > '800px'){
-                        primaryImg.style.width = '800px'
-                    }
-
 
                     //display image description
                     const imgDescription = document.getElementById('description')

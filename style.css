@@ -3,12 +3,13 @@ img {
     box-shadow: 0 0 20px gray;
     border-radius: 7px;
     height: 500px;
+    max-width: 800px;
   }
 
   header{
     text-align: center;
     color: red;
-    text-shadow: 0 0 3px black, 0 0 5px black;
+    text-shadow: 0 0 10px black, 0 0 10px black;
     font-size: 27px;
     background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRozrutdeyYrDchvY8m2ktG0NVyJ1l2gFLIWA&s");
   }
@@ -17,8 +18,14 @@ img {
   ul {
     list-style-type: none; /* Remove bullets */
      padding: 0;  /*Remove padding */
-     margin: 0;  /*Remove margins */
+     margin: 0px;  /*Remove margins */
      font-size: 16px;
+     border-radius: 10px;
+     margin: 10px;
+  }
+
+  li{
+    margin: 5px;
   }
 
 
@@ -26,15 +33,24 @@ img {
     font-size: 24px;
     font-style: italic;
     font-weight: bold;
+    margin: 0;
+
   }
 
   #Date{
     font-size: 24px;
+    margin: 0;
+
   }
 
   #Artist{
-    font-size: 20px
+    font-size: 20px;
+    margin: 0;
   }
+
+
+
+
 
   button, input[type=submit]{
     border-radius: 12px;
