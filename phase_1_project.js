@@ -7,8 +7,6 @@ function getRandomIndex(artObjectIDs){
 
 //Test if the index of the given array of object ids returns a valid object with an image URL
 function testIfImage(artObjectIDs,randomIndex){
-    const imgDescription = document.getElementById('description')
-    imgDescription.textContent = ""
     fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${artObjectIDs[randomIndex]}`)
     .then(response => {
         //If object is not valid run function again with different random index
@@ -18,6 +16,9 @@ function testIfImage(artObjectIDs,randomIndex){
         else{
             response.json()
             .then(json => {
+                const imgDescription = document.getElementById('description')
+                imgDescription.textContent = ""
+
                 //if object does not have an image URL run function again with different random index
                 if(json.primaryImage === ""){
                     testIfImage(artObjectIDs,getRandomIndex(artObjectIDs))
@@ -32,6 +33,11 @@ function testIfImage(artObjectIDs,randomIndex){
                     const imgLink = document.getElementById('img-link')
                     primaryImg.src = json.primaryImage
                     imgLink.href = json.objectURL
+
+                    if(primaryImg.offsetWidth > '800px'){
+                        primaryImg.style.width = '800px'
+                    }
+
 
                     //display image description
                     const imgDescription = document.getElementById('description')
@@ -63,7 +69,6 @@ function testIfImage(artObjectIDs,randomIndex){
     })
 }
 
-
 //fetch and display data for any given resource URL
 function fetchData(resource){
     fetch(resource)
@@ -73,7 +78,7 @@ function fetchData(resource){
             alert('No images match the search result!')
         }
         else{
-            testIfImage(json.objectIDs,getRandomIndex(json.objectIDs))
+            testIfImage(json.objectIDs,getRandomIndex(json.objectIDs))            
         }
         
     })
@@ -134,4 +139,7 @@ main()
 
 
 //already showed all images alert
-//what if you put multiple words in the search
+//too big of image
+//format other details
+
+//upon each new pull of artobject id ran through needs to get repopulated
